@@ -18,3 +18,7 @@ This project does not yet have a public API connection
 SUPPORT VERSION
 
 1.18.2
+
+DESCRIPTION
+
+This plugin changes the amethyst block to the radio and adds the mechanics of a real radio
