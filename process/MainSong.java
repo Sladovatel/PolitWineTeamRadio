@@ -1,13 +1,12 @@
-package net.pbradio.process;
+package net.politwineteamradio.process;
 
 import net.kyori.adventure.sound.SoundStop;
-import net.pbradio.PBRadion;
+import net.politwineteamradio.PolitWineTeamRadio;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
-
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +18,8 @@ public class MainSong {
     private static final Map<Block, Block> Radio1 = new HashMap<>();
     private static final Map<Block, Block> Radio2 = new HashMap<>();
     private static final Map<Block, Block> Radio3 = new HashMap<>();
+    private static final Map<Block, Block> Radio4 = new HashMap<>();
+    private static final Map<Block, Block> Radio5 = new HashMap<>();
     public static String RetroFM = "1musicnassvizala";
     public static String RetroFMa = "Музыка нас вязала - Мираж";
     public static double RetroFMb = 82.4;
@@ -31,11 +32,11 @@ public class MainSong {
     public static String RadioENERGY = "bones";
     public static String RadioENERGYa = "Bones - Imagine Dragons";
     public static double RadioENERGYb = 114.0;
-    public static String RadioXIT = "";
-    public static String RadioXITa = "";
+    public static String RadioXIT = "5moonlight";
+    public static String RadioXITa = "moonlight - speed up, Nightcore";
     public static double RadioXITb = 88.8;
-    private final PBRadion plugin;
-    public MainSong(PBRadion plugin) {
+    private final PolitWineTeamRadio plugin;
+    public MainSong(PolitWineTeamRadio plugin) {
         this.plugin = plugin;
     }
 
@@ -64,6 +65,7 @@ public class MainSong {
         }
     }
 
+
     public static void StartWave52(Player player, Block block, double nowa) {
         double radius = 20;
         Block nowblock = Active.get(block);
@@ -77,11 +79,15 @@ public class MainSong {
                     }
                 }
                 Location center = block.getLocation();
-               String soundName = "1changeradio";
+                String soundName = "1changeradio";
                 playSoundInRadius(center, radius, soundName);
-                StratRetroFM(block, player);
-                Radio1.remove(block, block);
-                Radio2.put(block, block);
+                String name = "RetroFM";
+                StratSongRetroPlayer(block, player);
+                Radio1.put(block, block);
+                Radio2.remove(block, block);
+                Radio3.remove(block, block);
+                Radio4.remove(block, block);
+                Radio5.remove(block, block);
             } else if (nowa == RodinaFMb) {
                 for (Player player1 : Bukkit.getOnlinePlayers()) {
                     Location playerLocation = player1.getLocation();
@@ -91,11 +97,15 @@ public class MainSong {
                     }
                 }
                 Location center = block.getLocation();
-                 String soundName = "1changeradio";
+                String soundName = "1changeradio";
                 playSoundInRadius(center, radius, soundName);
-                StratRodinaFM(block, player);
-                Radio2.remove(block, block);
-                Radio3.put(block, block);
+                String name = "RodinaFM";
+                StratSongRodinaPlayer(block, player);
+                Radio1.remove(block, block);
+                Radio2.put(block, block);
+                Radio3.remove(block, block);
+                Radio4.remove(block, block);
+                Radio5.remove(block, block);
             } else if (nowa == GrusnoRadiob) {
                 for (Player player1 : Bukkit.getOnlinePlayers()) {
                     Location playerLocation = player1.getLocation();
@@ -105,11 +115,51 @@ public class MainSong {
                     }
                 }
                 Location center = block.getLocation();
-               String soundName = "1changeradio";
+                String soundName = "1changeradio";
                 playSoundInRadius(center, radius, soundName);
-               StratGrusnoRadio(block, player);
+                String name = "GrusnoRadiob";
+                StratSongGrusnoPlayer(block, player);
+                Radio1.remove(block, block);
+                Radio2.remove(block, block);
+                Radio3.put(block, block);
+                Radio4.remove(block, block);
+                Radio5.remove(block, block);
+            } else if (nowa == RadioENERGYb) {
+                for (Player player1 : Bukkit.getOnlinePlayers()) {
+                    Location playerLocation = player1.getLocation();
+                    Location center = block.getLocation();
+                    if (playerLocation.distance(center) <= radius) {
+                        player.stopSound(SoundStop.all());
+                    }
+                }
+                Location center = block.getLocation();
+                String soundName = "1changeradio";
+                playSoundInRadius(center, radius, soundName);
+                String name = "RadioENERGY";
+                StratSongEnergyPlayer(block, player);
+                Radio1.remove(block, block);
+                Radio2.remove(block, block);
                 Radio3.remove(block, block);
-                Radio1.put(block, block);
+                Radio4.put(block, block);
+                Radio5.remove(block, block);
+            } else if (nowa == RadioXITb) {
+                for (Player player1 : Bukkit.getOnlinePlayers()) {
+                    Location playerLocation = player1.getLocation();
+                    Location center = block.getLocation();
+                    if (playerLocation.distance(center) <= radius) {
+                        player.stopSound(SoundStop.all());
+                    }
+                }
+                Location center = block.getLocation();
+                String soundName = "1changeradio";
+                playSoundInRadius(center, radius, soundName);
+                String name = "RadioXIT";
+                StratSongXitPlayer(block, player);
+                Radio1.remove(block, block);
+                Radio2.remove(block, block);
+                Radio3.remove(block, block);
+                Radio4.remove(block, block);
+                Radio5.put(block, block);
             } else {
                 for (Player player1 : Bukkit.getOnlinePlayers()) {
                     Location playerLocation = player1.getLocation();
@@ -127,9 +177,10 @@ public class MainSong {
         }
     }
 
-    //Retro
+    //Start and restart song | Старт и рестарт песен
 
-    public static void StratRetroFM(Block block, Player player) {
+    //Retro radio
+    public static void StratSongRetroPlayer(Block block, Player player) {
         double radius = 20;
         String soundName = RetroFM;
         Location center = block.getLocation();
@@ -141,100 +192,175 @@ public class MainSong {
             }
         }
     }
-    public static void StratRetroFM1(Block block) {
+    public static void StratSongRetroPlugin(Block block) {
         double radius = 20;
+        Block nowblock = Active.get(block);
+        if (nowblock != null) {
+            Location center = block.getLocation();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                Location playerLocation = player.getLocation();
+                if (playerLocation.distance(center) <= radius) {
+                    player.stopSound(SoundStop.all());
+                    player.sendActionBar(RetroFMa);
+                }
+            }
+            String soundName = RetroFM;
+            playSoundInRadius(center, radius, soundName);
+        }
+    }
+    //Rodina radio
+    public static void StratSongRodinaPlayer(Block block, Player player) {
+        double radius = 20;
+        String soundName = RodinaFM;
         Location center = block.getLocation();
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            Location playerLocation = player.getLocation();
+        playSoundInRadius(center, radius, soundName);
+        for (Player player1 : Bukkit.getOnlinePlayers()) {
+            Location playerLocation = player1.getLocation();
             if (playerLocation.distance(center) <= radius) {
-                player.stopSound(SoundStop.all());
-                player.sendActionBar(RetroFMa);
+                player.sendActionBar(RodinaFMa);
             }
         }
-        String soundName = RetroFM;
-        playSoundInRadius(center, radius, soundName);
     }
-    public static void RestartRertoFM() {
+    public static void StratSongRodinaPlugin(Block block) {
+        double radius = 20;
+        Block nowblock = Active.get(block);
+        if (nowblock != null) {
+            Location center = block.getLocation();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                Location playerLocation = player.getLocation();
+                if (playerLocation.distance(center) <= radius) {
+                    player.stopSound(SoundStop.all());
+                    player.sendActionBar(RodinaFMa);
+                }
+            }
+            String soundName = RodinaFM;
+            playSoundInRadius(center, radius, soundName);
+        }
+    }
+    //Grusno radio
+    public static void StratSongGrusnoPlayer(Block block, Player player) {
+        double radius = 20;
+        String soundName = GrusnoRadio;
+        Location center = block.getLocation();
+        playSoundInRadius(center, radius, soundName);
+        for (Player player1 : Bukkit.getOnlinePlayers()) {
+            Location playerLocation = player1.getLocation();
+            if (playerLocation.distance(center) <= radius) {
+                player.sendActionBar(GrusnoRadioa);
+            }
+        }
+    }
+    public static void StratSongGrusnoPlugin(Block block) {
+        double radius = 20;
+        Block nowblock = Active.get(block);
+        if (nowblock != null) {
+            Location center = block.getLocation();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                Location playerLocation = player.getLocation();
+                if (playerLocation.distance(center) <= radius) {
+                    player.stopSound(SoundStop.all());
+                    player.sendActionBar(GrusnoRadioa);
+                }
+            }
+            String soundName = GrusnoRadio;
+            playSoundInRadius(center, radius, soundName);
+        }
+    }
+    //Energy radio
+    public static void StratSongEnergyPlayer(Block block, Player player) {
+        double radius = 20;
+        String soundName = RadioENERGY;
+        Location center = block.getLocation();
+        playSoundInRadius(center, radius, soundName);
+        for (Player player1 : Bukkit.getOnlinePlayers()) {
+            Location playerLocation = player1.getLocation();
+            if (playerLocation.distance(center) <= radius) {
+                player.sendActionBar(RadioENERGYa);
+            }
+        }
+    }
+    public static void StratSongEnergyPlugin(Block block) {
+        double radius = 20;
+        Block nowblock = Active.get(block);
+        if (nowblock != null) {
+            Location center = block.getLocation();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                Location playerLocation = player.getLocation();
+                if (playerLocation.distance(center) <= radius) {
+                    player.stopSound(SoundStop.all());
+                    player.sendActionBar(RadioENERGYa);
+                }
+            }
+            String soundName = RadioENERGY;
+            playSoundInRadius(center, radius, soundName);
+        }
+    }
+    //Xit radio
+    public static void StratSongXitPlayer(Block block, Player player) {
+        double radius = 20;
+        String soundName = RadioXIT;
+        Location center = block.getLocation();
+        playSoundInRadius(center, radius, soundName);
+        for (Player player1 : Bukkit.getOnlinePlayers()) {
+            Location playerLocation = player1.getLocation();
+            if (playerLocation.distance(center) <= radius) {
+                player.sendActionBar(RadioXITa);
+            }
+        }
+    }
+    public static void StratSongXitPlugin(Block block) {
+        double radius = 20;
+        Block nowblock = Active.get(block);
+        if (nowblock != null) {
+            Location center = block.getLocation();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                Location playerLocation = player.getLocation();
+                if (playerLocation.distance(center) <= radius) {
+                    player.stopSound(SoundStop.all());
+                    player.sendActionBar(RadioXITa);
+                }
+            }
+            String soundName = RadioXIT;
+            playSoundInRadius(center, radius, soundName);
+        }
+    }
+    //All restart | Все перезапуски
+    public static void RestartSongPlugin1() {
         for (Map.Entry<Block, Block> entry : Radio1.entrySet()) {
             Block block = entry.getValue();
-            StratRetroFM1(block);
+            StratSongRetroPlugin(block);
         }
     }
-
-    //Rodina
-
-    public static void StratRodinaFM(Block block, Player player) {
-        double radius = 20;
-        String soundName = RodinaFM;
-        Location center = block.getLocation();
-        playSoundInRadius(center, radius, soundName);
-        for (Player player1 : Bukkit.getOnlinePlayers()) {
-            Location playerLocation = player1.getLocation();
-            if (playerLocation.distance(center) <= radius) {
-                player.sendActionBar(RodinaFMa);
-            }
-        }
-    }
-    public static void StratRodinaFM1(Block block) {
-        double radius = 20;
-        String soundName = RodinaFM;
-        Location center = block.getLocation();
-        playSoundInRadius(center, radius, soundName);
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            Location playerLocation = player.getLocation();
-            if (playerLocation.distance(center) <= radius) {
-                player.stopSound(SoundStop.all());
-                player.sendActionBar(RodinaFMa);
-            }
-        }
-    }
-    public static void RestartRodinaFM() {
+    public static void RestartSongPlugin2() {
         for (Map.Entry<Block, Block> entry : Radio2.entrySet()) {
             Block block = entry.getValue();
-            StratRodinaFM1(block);
+            StratSongRodinaPlugin(block);
         }
     }
-
-    //GrusnoRadio
-
-    public static void StratGrusnoRadio(Block block, Player player) {
-        double radius = 20;
-        String soundName = GrusnoRadio;
-        Location center = block.getLocation();
-        playSoundInRadius(center, radius, soundName);
-        for (Player player1 : Bukkit.getOnlinePlayers()) {
-            Location playerLocation = player1.getLocation();
-            if (playerLocation.distance(center) <= radius) {
-                player.sendActionBar(GrusnoRadioa);
-            }
-        }
-    }
-    public static void StratGrusnoRadio1(Block block) {
-        double radius = 20;
-        String soundName = GrusnoRadio;
-        Location center = block.getLocation();
-        playSoundInRadius(center, radius, soundName);
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            Location playerLocation = player.getLocation();
-            if (playerLocation.distance(center) <= radius) {
-                player.stopSound(SoundStop.all());
-                player.sendActionBar(GrusnoRadioa);
-            }
-        }
-    }
-    public static void RestartGrusnoRadio() {
+    public static void RestartSongPlugin3() {
         for (Map.Entry<Block, Block> entry : Radio3.entrySet()) {
             Block block = entry.getValue();
-            StratGrusnoRadio1(block);
+            StratSongGrusnoPlugin(block);
+        }
+    }
+    public static void RestartSongPlugin4() {
+        for (Map.Entry<Block, Block> entry : Radio4.entrySet()) {
+            Block block = entry.getValue();
+            StratSongEnergyPlugin(block);
+        }
+    }
+    public static void RestartSongPlugin5() {
+        for (Map.Entry<Block, Block> entry : Radio5.entrySet()) {
+            Block block = entry.getValue();
+            StratSongXitPlugin(block);
         }
     }
 
-    //More
+    //Setting place and break block | Настройки поставки и ломания блока
 
-    public static void Place(Block block, Player player) {
+    public static void Place(Block block) {
         Radio.put(block, block);
-        Radio1.put(block, block);
-        SeePlayer.put(block, 80.0);
+        SeePlayer.put(block, 80.1);
     }
     public static void Break(Block block) {
         Block nowblock = Radio.get(block);
@@ -243,25 +369,36 @@ public class MainSong {
             Radio1.remove(block, block);
             Radio2.remove(block, block);
             Radio3.remove(block, block);
+            Radio4.remove(block, block);
+            Radio5.remove(block, block);
+            Active.remove(block, block);
             SeePlayer.remove(block);
         }
     }
 
-    //ChangeWave
+    //Change wave sckor | Изменение волны колесиком мыши
 
     public static void ChangeWave(Player player, Block block, boolean vec) {
         double noww = SeePlayer.get(block);
         DecimalFormat df = new DecimalFormat("#.#");
         double nowa = Double.valueOf(df.format(noww));
 
-        if (vec) {
+        if (nowa == 79.9) {
             SeePlayer.replace(block, SeePlayer.get(block), nowa+0.1);
-        } else {
+        } else if (nowa == 130.1) {
             SeePlayer.replace(block, SeePlayer.get(block), nowa-0.1);
+        } else {
+            if (vec) {
+                SeePlayer.replace(block, SeePlayer.get(block), nowa+0.1);
+            } else {
+                SeePlayer.replace(block, SeePlayer.get(block), nowa-0.1);
+            }
         }
         player.sendActionBar("Частота: " + nowa);
         StartWave52(player, block, nowa);
     }
+
+    //Start all sound | Старт всей музыки
 
     public static void playSoundInRadius(Location center, double radius, String soundName) {
         for (Player player : Bukkit.getOnlinePlayers()) {

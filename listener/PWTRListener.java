@@ -1,7 +1,7 @@
-package net.pbradio.listener;
+package net.politwineteamradio.listener;
 
-import net.pbradio.PBRadion;
-import net.pbradio.process.MainSong;
+import net.politwineteamradio.PolitWineTeamRadio;
+import net.politwineteamradio.process.MainSong;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -12,16 +12,16 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.RayTraceResult;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class PBRadioListiner implements Listener {
-    private final PBRadion plugin;
-    public PBRadioListiner(PBRadion plugin) {
+public class PWTRListener implements Listener {
+    private final PolitWineTeamRadio plugin;
+    public PWTRListener(PolitWineTeamRadio plugin) {
         this.plugin = plugin;
     }
 
@@ -30,15 +30,14 @@ public class PBRadioListiner implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
         Block block = event.getClickedBlock();
         Action action = event.getAction();
-        long currentTime = System.currentTimeMillis();
 
+        UUID uuid = player.getUniqueId();
+        long currentTime = System.currentTimeMillis();
         if (lastInteractTime.containsKey(uuid) && currentTime - lastInteractTime.get(uuid) < 100) {
             return;
         }
-
         lastInteractTime.put(uuid, currentTime);
 
         if (event.getClickedBlock().getType() == Material.AMETHYST_CLUSTER) {
@@ -49,10 +48,9 @@ public class PBRadioListiner implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         Block block = event.getBlock();
-        Player player = event.getPlayer();
 
         if (block.getType() == Material.AMETHYST_CLUSTER) {
-            MainSong.Place(block, player);
+            MainSong.Place(block);
         }
     }
 
@@ -60,6 +58,9 @@ public class PBRadioListiner implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         Block block = event.getBlock();
         if (block.getType() == Material.AMETHYST_CLUSTER) {
+            event.setCancelled(true);
+            event.getPlayer().getWorld().getBlockAt((int) event.getBlock().getLocation().getX(), (int) event.getBlock().getLocation().getY(), (int) event.getBlock().getLocation().getZ()).setType(Material.AIR);
+            event.getPlayer().getInventory().addItem(new ItemStack(Material.AMETHYST_CLUSTER));
             MainSong.Break(block);
         }
     }

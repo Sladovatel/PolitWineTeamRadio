@@ -1,31 +1,29 @@
-package net.pbradio;
+package net.politwineteamradio;
 
-import net.pbradio.cmd.PlaySong;
-import net.pbradio.listener.PBRadioListiner;
-import net.pbradio.process.MainSong;
+import net.politwineteamradio.cmd.MainCmd;
+import net.politwineteamradio.listener.PWTRListener;
+import net.politwineteamradio.process.MainSong;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class PBRadion extends JavaPlugin {
+public final class PolitWineTeamRadio extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(new PBRadioListiner(this), this);
+        Bukkit.getPluginManager().registerEvents(new PWTRListener(this), this);
         getLogger().info(ChatColor.DARK_GREEN + "PBRadio начало свою работу успшено");
-        this.getCommand("songstart").setExecutor(new PlaySong());
-        this.getCommand("pbradio").setExecutor(this);
+        this.getCommand("pwtr").setExecutor(new MainCmd(this));
         WaveRetroFM();
         WaveRodinaFM();
         WaveGrusnoRadio();
+        WaveRadioENERGY();
+        WaveRadioXIT();
     }
 
     @Override
     public void onDisable() {
         getLogger().info(ChatColor.DARK_RED + "PBRadio теперь выключен");
-
     }
 
     public void WaveRetroFM() {
@@ -58,7 +56,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b2;
                 MainSong.RetroFMa = a2;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 5460);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -66,7 +64,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b3;
                 MainSong.RetroFMa = a3;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 9310);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -74,7 +72,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b4;
                 MainSong.RetroFMa = a4;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 14270);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -82,7 +80,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b5;
                 MainSong.RetroFMa = a5;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 20230);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -90,7 +88,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b6;
                 MainSong.RetroFMa = a6;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 23190);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -98,7 +96,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b7;
                 MainSong.RetroFMa = a7;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 26910);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -106,7 +104,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b8;
                 MainSong.RetroFMa = a8;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 30630);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -114,7 +112,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b9;
                 MainSong.RetroFMa = a9;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 35710);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -122,7 +120,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b10;
                 MainSong.RetroFMa = a10;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 41030);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -130,7 +128,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b11;
                 MainSong.RetroFMa = a11;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 44970);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -138,7 +136,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b12;
                 MainSong.RetroFMa = a12;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
             }
         }, 49450);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -146,7 +144,7 @@ public final class PBRadion extends JavaPlugin {
             public void run() {
                 MainSong.RetroFM = b1;
                 MainSong.RetroFMa = a1;
-                MainSong.RestartRertoFM();
+                MainSong.RestartSongPlugin1();
                 WaveRetroFM();
             }
         }, 53590);
@@ -174,73 +172,73 @@ public final class PBRadion extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b2;
-                MainSong.RetroFMa = a2;
-                MainSong.RestartRodinaFM();
+                MainSong.RodinaFM = b2;
+                MainSong.RodinaFMa = a2;
+                MainSong.RestartSongPlugin2();
             }
         }, 4500);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b3;
-                MainSong.RetroFMa = a3;
-                MainSong.RestartRodinaFM();
+                MainSong.RodinaFM = b3;
+                MainSong.RodinaFMa = a3;
+                MainSong.RestartSongPlugin2();
             }
         }, 8140);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b4;
-                MainSong.RetroFMa = a4;
-                MainSong.RestartRodinaFM();
+                MainSong.RodinaFM = b4;
+                MainSong.RodinaFMa = a4;
+                MainSong.RestartSongPlugin2();
             }
         }, 14540);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b5;
-                MainSong.RetroFMa = a5;
-                MainSong.RestartRodinaFM();
+                MainSong.RodinaFM = b5;
+                MainSong.RodinaFMa = a5;
+                MainSong.RestartSongPlugin2();
             }
         }, 18460);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b6;
-                MainSong.RetroFMa = a6;
-                MainSong.RestartRodinaFM();
+                MainSong.RodinaFM = b6;
+                MainSong.RodinaFMa = a6;
+                MainSong.RestartSongPlugin2();
             }
         }, 21240);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b7;
-                MainSong.RetroFMa = a7;
-                MainSong.RestartRodinaFM();
+                MainSong.RodinaFM = b7;
+                MainSong.RodinaFMa = a7;
+                MainSong.RestartSongPlugin2();
             }
         }, 24640);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b8;
-                MainSong.RetroFMa = a8;
-                MainSong.RestartRodinaFM();
+                MainSong.RodinaFM = b8;
+                MainSong.RodinaFMa = a8;
+                MainSong.RestartSongPlugin2();
             }
         }, 30760);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b9;
-                MainSong.RetroFMa = a9;
-                MainSong.RestartRodinaFM();
+                MainSong.RodinaFM = b9;
+                MainSong.RodinaFMa = a9;
+                MainSong.RestartSongPlugin2();
             }
         }, 33640);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b1;
-                MainSong.RetroFMa = a1;
-                MainSong.RestartRodinaFM();
+                MainSong.RodinaFM = b1;
+                MainSong.RodinaFMa = a1;
+                MainSong.RestartSongPlugin2();
                 WaveRodinaFM();
             }
         }, 40820);
@@ -270,81 +268,81 @@ public final class PBRadion extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b2;
-                MainSong.RetroFMa = a2;
-                MainSong.RestartGrusnoRadio();
+                MainSong.GrusnoRadio = b2;
+                MainSong.GrusnoRadioa = a2;
+                MainSong.RestartSongPlugin3();
             }
         }, 5940);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b3;
-                MainSong.RetroFMa = a3;
-                MainSong.RestartGrusnoRadio();
+                MainSong.GrusnoRadio = b3;
+                MainSong.GrusnoRadioa = a3;
+                MainSong.RestartSongPlugin3();
             }
         }, 10780);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b4;
-                MainSong.RetroFMa = a4;
-                MainSong.RestartGrusnoRadio();
+                MainSong.GrusnoRadio = b4;
+                MainSong.GrusnoRadioa = a4;
+                MainSong.RestartSongPlugin3();
             }
         }, 14200);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b5;
-                MainSong.RetroFMa = a5;
-                MainSong.RestartGrusnoRadio();
+                MainSong.GrusnoRadio = b5;
+                MainSong.GrusnoRadioa = a5;
+                MainSong.RestartSongPlugin3();
             }
         }, 22260);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b6;
-                MainSong.RetroFMa = a6;
-                MainSong.RestartGrusnoRadio();
+                MainSong.GrusnoRadio = b6;
+                MainSong.GrusnoRadioa = a6;
+                MainSong.RestartSongPlugin3();
             }
         }, 26200);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b7;
-                MainSong.RetroFMa = a7;
-                MainSong.RestartGrusnoRadio();
+                MainSong.GrusnoRadio = b7;
+                MainSong.GrusnoRadioa = a7;
+                MainSong.RestartSongPlugin3();
             }
         }, 30040);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b8;
-                MainSong.RetroFMa = a8;
-                MainSong.RestartGrusnoRadio();
+                MainSong.GrusnoRadio = b8;
+                MainSong.GrusnoRadioa = a8;
+                MainSong.RestartSongPlugin3();
             }
         }, 33960);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b9;
-                MainSong.RetroFMa = a9;
-                MainSong.RestartGrusnoRadio();
+                MainSong.GrusnoRadio = b9;
+                MainSong.GrusnoRadioa = a9;
+                MainSong.RestartSongPlugin3();
             }
         }, 39060);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b10;
-                MainSong.RetroFMa = a10;
-                MainSong.RestartGrusnoRadio();
+                MainSong.GrusnoRadio = b10;
+                MainSong.GrusnoRadioa = a10;
+                MainSong.RestartSongPlugin3();
             }
         }, 42800);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b1;
-                MainSong.RetroFMa = a1;
-                MainSong.RestartGrusnoRadio();
+                MainSong.GrusnoRadio = b1;
+                MainSong.GrusnoRadioa = a1;
+                MainSong.RestartSongPlugin3();
                 WaveGrusnoRadio();
             }
         }, 46460);
@@ -378,42 +376,203 @@ public final class PBRadion extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run() {
-                MainSong.RetroFM = b2;
-                MainSong.RetroFMa = a2;
-                MainSong.RestartGrusnoRadio();
+                MainSong.RadioENERGY = b2;
+                MainSong.RadioENERGYa = a2;
+                MainSong.RestartSongPlugin4();
             }
-        }, 5940);
+        }, 3300);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b3;
+                MainSong.RadioENERGYa = a3;
+                MainSong.RestartSongPlugin4();
+            }
+        }, 6600);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b4;
+                MainSong.RadioENERGYa = a4;
+                MainSong.RestartSongPlugin4();
+            }
+        }, 10340);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b5;
+                MainSong.RadioENERGYa = a5;
+                MainSong.RestartSongPlugin4();
+            }
+        }, 14160);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b6;
+                MainSong.RadioENERGYa = a6;
+                MainSong.RestartSongPlugin4();
+            }
+        }, 18100);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b7;
+                MainSong.RadioENERGYa = a7;
+                MainSong.RestartSongPlugin4();
+            }
+        }, 22100);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b8;
+                MainSong.RadioENERGYa = a8;
+                MainSong.RestartSongPlugin4();
+            }
+        }, 26120);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b9;
+                MainSong.RadioENERGYa = a9;
+                MainSong.RestartSongPlugin4();
+            }
+        }, 30200);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b10;
+                MainSong.RadioENERGYa = a10;
+                MainSong.RestartSongPlugin4();
+            }
+        }, 35020);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b11;
+                MainSong.RadioENERGYa = a11;
+                MainSong.RestartSongPlugin4();
+            }
+        }, 39360);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b12;
+                MainSong.RadioENERGYa = a12;
+                MainSong.RestartSongPlugin4();
+            }
+        }, 43220);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioENERGY = b1;
+                MainSong.RadioENERGYa = a1;
+                MainSong.RestartSongPlugin4();
+                WaveRadioENERGY();
+            }
+        }, 48320);
     }
 
-    private long startTime;
-    private boolean isRunning;
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args[0].equals("1")) {
-            if (!isRunning) {
-                startTime = System.currentTimeMillis();
-                isRunning = true;
-                sender.sendMessage("Секундомер запущен!");
-            } else {
-                sender.sendMessage("Секундомер уже запущен");
+    public void WaveRadioXIT() {
+        String a1 = "moonlight - speed up, Nightcore";
+        String b1 = "5moonlight";
+        String a2 = "Скажи мне кто ты - xxxmanera";
+        String b2 = "5skazimnektoti";
+        String a3 = "Мох - Oxxxymiron";
+        String b3 = "5mox";
+        String a4 = "Тесно - Aarne, BUSHIDO ZHO, ANIKV";
+        String b4 = "5tesno";
+        String a5 = "На чиле - Джиган, ЕГОР КРИД, The Limba";
+        String b5 = "5nachile";
+        String a6 = "Капитал - Noiz MC, Ляпис Трубецкой";
+        String b6 = "5kapital";
+        String a7 = "Опа опа Америка Европа";
+        String b7 = "5opaopaamerika";
+        String a8 = "Double Cup - MORGENSHTERN, kizary";
+        String b8 = "5doublecup";
+        String a9 = "PAIN VIBES - BUSHIDO ZHO, blago white";
+        String b9 = "5painvibe";
+        String a10 = "PAIN VIBES 2 - BUSHIDO ZHO, blago white";
+        String b10 = "5painvibe2";
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioXIT = b2;
+                MainSong.RadioXITa = a2;
+                MainSong.RestartSongPlugin5();
             }
-        }
-        if (args[0].equals("2")) {
-            if (isRunning) {
-                long elapsedTime = System.currentTimeMillis() - startTime;
-                long elapsedSeconds = elapsedTime / 1000;
-                sender.sendMessage("Прошло времени: " + elapsedSeconds + " секунд");
-            } else {
-                sender.sendMessage("Секундомер не запущен");
+        }, 3380);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioXIT = b3;
+                MainSong.RadioXITa = a3;
+                MainSong.RestartSongPlugin5();
             }
-        }
-        if (args[0].equals("3")) {
-            if (isRunning) {
-                isRunning = false;
-                sender.sendMessage("Секундомер остановле");
-            } else {
-                sender.sendMessage("Секундомер не запущен");
+        }, 6120);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioXIT = b4;
+                MainSong.RadioXITa = a4;
+                MainSong.RestartSongPlugin5();
             }
-        }
-        return true;
+        }, 8740);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioXIT = b5;
+                MainSong.RadioXITa = a5;
+                MainSong.RestartSongPlugin5();
+            }
+        }, 11820);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioXIT = b6;
+                MainSong.RadioXITa = a6;
+                MainSong.RestartSongPlugin5();
+            }
+        },18740);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioXIT = b7;
+                MainSong.RadioXITa = a7;
+                MainSong.RestartSongPlugin5();
+            }
+        }, 21800);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioXIT = b8;
+                MainSong.RadioXITa = a8;
+                MainSong.RestartSongPlugin5();
+            }
+        }, 25960);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioXIT = b9;
+                MainSong.RadioXITa = a9;
+                MainSong.RestartSongPlugin5();
+            }
+        }, 30000);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioXIT = b10;
+                MainSong.RadioXITa = a10;
+                MainSong.RestartSongPlugin5();
+            }
+        }, 32700);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            @Override
+            public void run() {
+                MainSong.RadioXIT = b1;
+                MainSong.RadioXITa = a1;
+                MainSong.RestartSongPlugin5();
+                WaveRadioXIT();
+            }
+        }, 36560);
     }
 }

@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net</groupId>
-  <artifactId>PBRadio</artifactId>
+  <artifactId>PolitWineTeamRadio</artifactId>
   <version>4.0</version>
   <packaging>jar</packaging>
 
-  <name>PBRadio</name>
+  <name>PolitWineTeamRadio</name>
 
   <properties>
     <java.version>1.8</java.version>
